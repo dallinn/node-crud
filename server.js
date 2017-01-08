@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 var ejs = require('ejs');
 
+var routes = require('./routes.js'); 
+
 app.set('view engine', 'ejs');
 
-app.get('/', function (req,res) {
-    res.render('pages/index');
-});
+app.use('/', routes);
 
 app.listen(3000, function () {
-    console.log('server up at localhost:3000');
+    console.log('http://localhost:3000');
 });
