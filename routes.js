@@ -7,17 +7,16 @@ module.exports = (function() {
                 console.error('mysql error : ' + err.stack);
                 return;
             }
-
             console.log('connected as id ' + db.threadId);
         });
 
     router.route('/')
         .get(function (req, res) {
-            db.query('SELECT * FROM todo ORDER BY id DESC', function(err, result) {
+            db.query('SELECT * FROM todo WHERE completed=0 ORDER BY id DESC; SELECT * from todo WHERE completed=1 ORDER BY id DESC', function(err, results) {
                 if(err){
                     throw err;
                 } else {
-                    res.render('pages/index', {todos: result});
+                    res.render('pages/index', {todos: results[0], completedTodos: results[1]});
                 };
             });
         })
@@ -29,7 +28,14 @@ module.exports = (function() {
             res.send('put to /')
         })
         .delete(function (req, res) {
-            res.send('delete to /')
+            db.query('UPDATE todo SET completed=1 where ?', {id: req.query.id}), function(err){
+                if (err) {
+                    throw err;
+                } else {
+                    res.send(req.query.id);
+                }
+            };
+            res.redirect('back');
         });
 
     return router;

@@ -1,12 +1,27 @@
-<h2>TODO</h2>
+<h1>TODO LIST</h1>
 <hr>
 
 <form method="post">
     What do you need to do today?:
-    <input type="text" name="todo">
+    <input type="text" name="todo" required>
     <input type="submit" value="Submit">
 </form>
 
+<h2>Todo:</h2>
+<hr>
+
 <% todos.forEach(function (todo) { %>
-    <p><%= todo.message %>
+    <form method="post" action="?id=<%= todo.id %>&_method=DELETE">
+        <p><%= todo.message %> <input type="submit" value="Completed"></p>
+    </form>
 <% }) %>
+
+<hr>
+<h2>Completed:</h2>
+<hr>
+
+<% completedTodos.forEach(function (complete) {%>
+    <p style="color:lightgrey"><%= complete.message %></p>
+<% }) %>
+
+
