@@ -18,6 +18,7 @@
   "homepage": "https://github.com/dallinn/node-crud#readme",
   "dependencies": {
     "ejs": "^2.5.5",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mysql": "^2.12.0"
   }
 }
