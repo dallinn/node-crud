@@ -13,13 +13,17 @@ module.exports = (function() {
 
     router.route('/')
         .get(function (req, res) {
-            var message = req.query.m;
-            res.render('pages/index', {
-                message: message,   
+            db.query('SELECT * FROM todo ORDER BY id DESC', function(err, result) {
+                if(err){
+                    throw err;
+                } else {
+                    res.render('pages/index', {todos: result});
+                };
             });
         })
         .post(function (req, res) {
-            res.send('post to /')
+            db.query('INSERT INTO todo SET ?', {message: req.body.todo});
+            res.redirect('back');
         })
         .put(function (req, res) {
             res.send('put to /')
