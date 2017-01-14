@@ -12,16 +12,16 @@
 
 <% todos.forEach(function (todo) { %>
     <form method="post" action="?id=<%= todo.id %>&_method=DELETE">
-        <p><%= todo.message %> <input type="submit" value="Completed"></p>
+        <p><%= todo.message %> Created on: <%= todo.date %> <input type="submit" value="Completed"></p>
     </form>
 <% }) %>
 
 <hr>
 <h2>Completed:</h2>
-<hr>
 
 <% completedTodos.forEach(function (complete) {%>
-    <p style="color:lightgrey"><%= complete.message %></p>
+    <p style="color:lightgrey"><%= complete.message %> Created on: <%= complete.date %>/p>
 <% }) %>
 
+<hr>
 
